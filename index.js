@@ -19,13 +19,18 @@ const io = socketIO.listen(server);
 
 //websockets
 io.on('connection', (socket) => {
-    console.log('new connection');
+    console.log("new connection")
 
-    socket.on('new message', (data) => {
+    socket.on("new message", (data) => {
         console.log(data);
-    });
 
-    socket.on('join',(data)=>{
+        socket.broadcast.emit("new message",data)
+    })
+
+
+    socket.on("new user", (data) => {
         console.log(data);
-    });
+
+        socket.broadcast.emit("new user",data)
+    })
 });
